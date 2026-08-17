@@ -26,8 +26,8 @@ def format_sens(user_id):
 YES_EMOJI = "✅"
 NO_EMOJI = "❌"
 
-YES_MESSAGE = "🎯 Good kitty. Stay disciplined. Consistency is the whole game."
-NO_MESSAGE = "🚨 CHANGE IT BACK, RIGHT NYEOW"
+YES_MESSAGE = "Good kitty~"
+NO_MESSAGE = "CHANGE IT BACK, RIGHT NYEOW!!!!"
 
 intents = discord.Intents.default()
 intents.reactions = True  # covers both guild and DM reaction events
@@ -72,11 +72,12 @@ async def on_raw_reaction_add(payload):
     emoji = str(payload.emoji)
     user = await client.fetch_user(payload.user_id)
     sens = format_sens(payload.user_id)
+    edpi = SENSITIVITIES[payload.user_id]['edpi']
 
     if emoji == YES_EMOJI:
-        await user.send(f"{YES_MESSAGE} ({sens} locked in.)")
+        await user.send (YES_MESSAGE)
     elif emoji == NO_EMOJI:
-        await user.send(f"{NO_MESSAGE} Get it back to {sens}.")
+        await user.send(f"{NO_MESSAGE} Get it back to {edpi:.0f} eDPI")
 
 
 client.run(TOKEN)
